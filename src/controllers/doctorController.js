@@ -10,16 +10,20 @@ const createDoctor = async (req, res, next) => {
   }
 };
 
-const getProducts = async (req, res) => {
-  throw new RouteNotImplementedError();
+const getDoctors = async (req, res) => {
+  try {
+    res.status(200).json(await doctorService.getAllDoctors());
+  } catch (err) {
+    next(err);
+  }
 };
 
 const deleteProduct = (req, res) => {
-  throw new RouteNotImplementedError();
+  throw new RouterNotImplementedError();
 };
 
 const updateProduct = (req, res) => {
-  throw new RouteNotImplementedError();
+  throw new RouterNotImplementedError();
 };
 
-export { createDoctor };
+export { createDoctor, getDoctors };

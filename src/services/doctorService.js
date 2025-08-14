@@ -5,3 +5,7 @@ export const createDoctor = async (doctorData) => {
   await newDoctor.save();
   return newDoctor;
 };
+
+export const getAllDoctors = async () => {
+  return Doctor.find();
+};

@@ -11,6 +11,8 @@ productRouter.post(
   doctorController.createDoctor
 );
 
+productRouter.get("/", doctorController.getDoctors);
+
 // productRouter.get("/", productController.getProducts);
 
 export default productRouter;
