@@ -10,13 +10,14 @@ const createDoctor = async (req, res, next) => {
   }
 };
 
-const getDoctors = async (req, res) => {
+const getDoctors = async (req, res, next) => {
   try {
     res.status(200).json(await doctorService.getAllDoctors());
   } catch (err) {
     next(err);
   }
 };
+
 
 const deleteProduct = (req, res) => {
   throw new RouterNotImplementedError();

@@ -3,16 +3,16 @@ import { validatePayload } from "../middlewares/index.js";
 import { CreateDoctorSchema } from "../schemas/index.js";
 import { doctorController } from "../controllers/index.js";
 
-const productRouter = Router();
+const doctorRouter = Router();
 
-productRouter.post(
+doctorRouter.post(
   "/",
   validatePayload(CreateDoctorSchema),
   doctorController.createDoctor
 );
 
-productRouter.get("/", doctorController.getDoctors);
+doctorRouter.get("/", doctorController.getDoctors);
 
-// productRouter.get("/", productController.getProducts);
+// doctorRouter.get("/", productController.getProducts);
 
-export default productRouter;
+export default doctorRouter;
