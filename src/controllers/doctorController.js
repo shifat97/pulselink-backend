@@ -21,6 +21,7 @@ const getDoctors = async (req, res, next) => {
 const getDoctorById = async (req, res) => {
   try {
     const { id } = req.query;
+    console.log("Requested doctor id:", id);
     const doctor = await doctorService.getDoctorById(id);
 
     if (!doctor) {
@@ -33,6 +34,15 @@ const getDoctorById = async (req, res) => {
   }
 }
 
+const getTopDoctors = async (req, res) => {
+  try {
+    const topDoctors = await doctorService.getTopDoctor();
+    res.status(200).json(topDoctors);
+  } catch (e) {
+    res.status(500).json({ error: e.message })
+  }
+}
+
 const deleteProduct = (req, res) => {
   throw new RouterNotImplementedError();
 };
@@ -41,4 +51,4 @@ const updateProduct = (req, res) => {
   throw new RouterNotImplementedError();
 };
 
-export { createDoctor, getDoctors, getDoctorById };
+export { createDoctor, getDoctors, getDoctorById, getTopDoctors };

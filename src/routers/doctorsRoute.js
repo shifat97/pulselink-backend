@@ -12,7 +12,8 @@ doctorRouter.post(
 );
 
 doctorRouter.get("/", doctorController.getDoctors);
-doctorRouter.get("/:id", doctorController.getDoctorById);
+doctorRouter.get("/top", doctorController.getTopDoctors);
+doctorRouter.get("/doctor", doctorController.getDoctorById);
 
 // doctorRouter.get("/", productController.getProducts);
 

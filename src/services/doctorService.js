@@ -1,3 +1,4 @@
+import mongoose from "mongoose";
 import { Doctor } from "../models/index.js";
 
 export const createDoctor = async (doctorData) => {
@@ -11,5 +12,12 @@ export const getAllDoctors = async () => {
 };
 
 export const getDoctorById = async (id) => {
-  return Doctor.findOne({ id })
+  if (!mongoose.Types.ObjectId.isValid(id)) {
+    return null;
+  }
+  return Doctor.findById(id);
+};
+
+export const getTopDoctor = async () => {
+  return Doctor.find({ isTopDoctor: true });
 }
