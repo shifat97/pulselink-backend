@@ -21,3 +21,7 @@ export const getDoctorById = async (id) => {
 export const getTopDoctor = async () => {
   return Doctor.find({ isTopDoctor: true });
 }
+
+export const getDoctorsByType = async (type) => {
+  return Doctor.find({ type })
+}

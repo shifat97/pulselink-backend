@@ -43,6 +43,21 @@ const getTopDoctors = async (req, res) => {
   }
 }
 
+const getDoctorsByType = async (req, res) => {
+  try {
+    const { type } = req.params;
+    const doctorsByType = await doctorService.getDoctorsByType(type);
+
+    if (!doctorsByType) {
+      res.status(404).json({ error: "No doctor found with this type" });
+    }
+
+    res.status(200).json(doctorsByType);
+  } catch (e) {
+    res.status(500).json({ error: e.message });
+  }
+}
+
 const deleteProduct = (req, res) => {
   throw new RouterNotImplementedError();
 };
@@ -51,4 +66,4 @@ const updateProduct = (req, res) => {
   throw new RouterNotImplementedError();
 };
 
-export { createDoctor, getDoctors, getDoctorById, getTopDoctors };
+export { createDoctor, getDoctors, getDoctorById, getTopDoctors, getDoctorsByType };
