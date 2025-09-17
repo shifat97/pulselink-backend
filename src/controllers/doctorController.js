@@ -18,6 +18,21 @@ const getDoctors = async (req, res, next) => {
   }
 };
 
+const getDoctorById = async (req, res) => {
+  try {
+    const { id } = req.params;
+    console.log(typeof (id))
+    const doctor = await doctorService.getDoctorById(id);
+
+    if (!doctor) {
+      return res.status(404).json({ error: "Doctor not found" });
+    }
+
+    res.status(200).json(doctor);
+  } catch (e) {
+    res.status(500).json({ error: e.message });
+  }
+}
 
 const deleteProduct = (req, res) => {
   throw new RouterNotImplementedError();
@@ -27,4 +42,4 @@ const updateProduct = (req, res) => {
   throw new RouterNotImplementedError();
 };
 
-export { createDoctor, getDoctors };
+export { createDoctor, getDoctors, getDoctorById };

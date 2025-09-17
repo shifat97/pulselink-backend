@@ -9,3 +9,7 @@ export const createDoctor = async (doctorData) => {
 export const getAllDoctors = async () => {
   return Doctor.find();
 };
+
+export const getDoctorById = async (id) => {
+  return Doctor.findOne({ id })
+}
