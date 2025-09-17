@@ -6,6 +6,6 @@ export const createDoctor = async (doctorData) => {
   return newDoctor;
 };
 
-export const getAllDoctors = async (type) => {
+export const getAllDoctors = async () => {
   return Doctor.find();
 };
