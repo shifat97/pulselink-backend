@@ -20,8 +20,7 @@ const getDoctors = async (req, res, next) => {
 
 const getDoctorById = async (req, res) => {
   try {
-    const { id } = req.params;
-    console.log(typeof (id))
+    const { id } = req.query;
     const doctor = await doctorService.getDoctorById(id);
 
     if (!doctor) {
