@@ -25,3 +25,12 @@ export const getTopDoctor = async () => {
 export const getDoctorsByType = async (type) => {
   return Doctor.find({ type })
 }
+
+export const getTopDoctorByType = async (type, isTopDoctor) => {
+  return Doctor.find({
+    $and: [
+      { type: type },
+      { isTopDoctor: isTopDoctor }
+    ]
+  })
+}

@@ -18,11 +18,18 @@ const getDoctors = async (req, res, next) => {
   }
 };
 
-const getDoctorById = async (req, res) => {
+const getDoctorByParameter = async (req, res) => {
   try {
-    const { id } = req.query;
-    console.log("Requested doctor id:", id);
-    const doctor = await doctorService.getDoctorById(id);
+    const { id, type, isTopDoctor } = req.query;
+    let doctor;
+
+    if (id) {
+      doctor = await doctorService.getDoctorById(id);
+    } else if (type && !isTopDoctor) {
+      doctor = await doctorService.getDoctorsByType(type);
+    } else if (type && isTopDoctor) {
+      doctor = await doctorService.getTopDoctorByType(type, isTopDoctor);
+    }
 
     if (!doctor) {
       return res.status(404).json({ error: "Doctor not found" });
@@ -43,21 +50,6 @@ const getTopDoctors = async (req, res) => {
   }
 }
 
-const getDoctorsByType = async (req, res) => {
-  try {
-    const { type } = req.params;
-    const doctorsByType = await doctorService.getDoctorsByType(type);
-
-    if (!doctorsByType) {
-      res.status(404).json({ error: "No doctor found with this type" });
-    }
-
-    res.status(200).json(doctorsByType);
-  } catch (e) {
-    res.status(500).json({ error: e.message });
-  }
-}
-
 const deleteProduct = (req, res) => {
   throw new RouterNotImplementedError();
 };
@@ -66,4 +58,4 @@ const updateProduct = (req, res) => {
   throw new RouterNotImplementedError();
 };
 
-export { createDoctor, getDoctors, getDoctorById, getTopDoctors, getDoctorsByType };
+export { createDoctor, getDoctors, getDoctorByParameter, getTopDoctors };
