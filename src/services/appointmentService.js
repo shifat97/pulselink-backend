@@ -6,3 +6,7 @@ export const createAppointment = async (appointmentData) => {
   await newAppointment.save();
   return newAppointment;
 }
+
+export const getAppointment = async () => {
+  return Appointment.find();
+}

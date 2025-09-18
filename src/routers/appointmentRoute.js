@@ -11,4 +11,6 @@ appointmentRouter.post(
   appointmentController.createAppointment
 );
 
+appointmentRouter.get("/", appointmentController.getAppointment);
+
 export default appointmentRouter;
