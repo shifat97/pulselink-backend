@@ -1,7 +1,9 @@
-import productRouter from "./doctorsRoute.js";
+import doctorRouter from "./doctorsRoute.js";
+import appointmentRouter from "./appointmentRoute.js";
 
 const configureRouters = (app) => {
-  app.use("/doctors", productRouter); // path, route
+  app.use("/doctors", doctorRouter); // path, route
+  app.use("/appointments", appointmentRouter);
 };
 
 export default configureRouters;
