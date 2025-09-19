@@ -15,3 +15,20 @@ export const createUser = async (userData) => {
 
   return userModel;
 };
+
+export const loginUser = async (loginCredential) => {
+  const { email, password } = loginCredential;
+  const isUserExits = await User.findOne({ email });
+
+  if (!isUserExits) {
+    return false;
+  }
+
+  const isPasswordEqual = await bcrypt.compare(password, isUserExits.password);
+
+  if (!isPasswordEqual) {
+    return false;
+  }
+
+  return isUserExits;
+};

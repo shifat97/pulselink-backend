@@ -8,7 +8,8 @@ const authRouter = Router();
 authRouter.post(
   "/sign-up",
   validatePayload(CreateAuthSchema),
-  authController.createUser
+  authController.signUpUser
 );
+authRouter.post("/sign-in", authController.signInUser);
 
 export default authRouter;

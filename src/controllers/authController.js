@@ -1,8 +1,8 @@
-import { RouterNotImplementedError } from "../errors/index.js";
-// import envConfig from "../configs/index.js";
 import { authService } from "../services/index.js";
+import { envConfig } from "../configs/index.js";
+import jwt from "jsonwebtoken";
 
-const createUser = async (req, res) => {
+const signUpUser = async (req, res) => {
   try {
     const newUser = await authService.createUser(req.body);
 
@@ -19,4 +19,32 @@ const createUser = async (req, res) => {
   }
 };
 
-export { createUser };
+const signInUser = async (req, res) => {
+  try {
+    const user = await authService.loginUser(req.body);
+    console.log(user);
+    const errorMessage = "Auth failed email or password is wrong";
+
+    if (!user) {
+      res.status(403).json({ message: errorMessage, success: false });
+    }
+
+    const jwtToken = jwt.sign(
+      { email: user.email, _id: user._id },
+      envConfig.JWT_SECRET,
+      { expiresIn: "24h" }
+    );
+
+    res.status(201).json({
+      message: "Signup successful",
+      success: true,
+      jwtToken: jwtToken,
+      email: user.email,
+      name: user.fullName,
+    });
+  } catch (e) {
+    res.status(500).json({ message: "Internal server error", success: false });
+  }
+};
+
+export { signUpUser, signInUser };
